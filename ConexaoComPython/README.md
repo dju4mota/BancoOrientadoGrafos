@@ -1,9 +1,9 @@
 # Como executar?
-3. Instale as dependências:
+1. Instale as dependências:
     ```sh
     python -m pip install -r requirements.txt
     ```
-4. execute o arquivo `main.py`
+2. execute o arquivo `main.py`
     ```sh
     python main.py
     ```
