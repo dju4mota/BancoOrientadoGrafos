@@ -1,0 +1,82 @@
+// criando os nós 
+
+create (ned_stark:Guerreiro:Pessoa{nome: "Ned Stark", ano_nascimento: 263, vivo: false, arma: "Espada Grande"})
+
+create (catelyn_tully:Nobre:Pessoa{nome: "Catelyn Tully", ano_nascimento: 264, vivo: false})
+
+create (rickard_stark:Guerreiro:Pessoa{nome: "Rickard Stark", ano_nascimento: 230, vivo: false, arma: "Espada"})
+
+create (robb_stak:Guerreiro:Pessoa{nome: "Robb Stark", ano_nascimento: 283, vivo: false, arma: "Espada Grande"})
+
+create (sansa_stark:Nobre:Pessoa{nome: "Sansa Stark", ano_nascimento: 286, vivo: true})
+
+create (arya_stark:Assassina:Pessoa{nome: "Arya Stark", ano_nascimento: 289, vivo: true, arma: "Adaga"})
+
+create (bran_stark:Feiticeiro:Pessoa{nome: "Bran Stark", ano_nascimento: 290, vivo: true, magia: "Possuir"})
+
+create (jon_snow:VigiaDaMuralha:Pessoa{nome: "Jon Snow", ano_nascimento: 283, vivo: true, arma: "Espada Grande"})
+
+create (aerys_targaryen:Rei:Pessoa{nome: "Aerys Targaryen", ano_nascimento: 244, vivo: false})
+
+create (daenerys_targaryen:Rainha:Pessoa{nome: "Daenerys Targaryen", ano_nascimento: 284, vivo: true})
+
+create (lyanna_stark:Guerreira:Pessoa{nome: "Lyanna Stark", ano_nascimento: 266, vivo: false, arma: "Espada e Escudo"})
+
+
+// definindo relacionamentos 
+
+
+PAI_MAE_DE  - legitimo: true/false
+IRMAO_IRMA_DE 
+AVO_DE
+ALIADO_DE 
+
+// criando os relacionamentos
+
+match(n:Pessoa{nome: "Ned Stark"}), (c:Pessoa{nome: "Catelyn Tully"}), 
+(r:Pessoa{nome: "Robb Stark"}),(s:Pessoa{nome: "Sansa Stark"}),
+(a:Pessoa{nome: "Arya Stark"}), (b:Pessoa{nome: "Bran Stark"}), (rs:Pessoa{nome: "Rickard Stark"}),
+(l:Pessoa{nome: "Lyanna Stark"})
+
+
+create (l)-[:IRMAO_IRMA_DE{legitimo:true}]->(n)
+create (n)-[:IRMAO_IRMA_DE{legitimo:true}]->(l)
+create (rs)-[:PAI_MAE_DE{legitimo:true}]->(n)
+
+create (n)-[:PAI_MAE_DE{legitimo:true}]->(r)
+create (n)-[:PAI_MAE_DE{legitimo:true}]->(s)
+create (n)-[:PAI_MAE_DE{legitimo:true}]->(a)
+create (n)-[:PAI_MAE_DE{legitimo:true}]->(b)
+
+create (c)-[:PAI_MAE_DE{legitimo:true}]->(r)
+create (c)-[:PAI_MAE_DE{legitimo:true}]->(s)
+create (c)-[:PAI_MAE_DE{legitimo:true}]->(a)
+create (c)-[:PAI_MAE_DE{legitimo:true}]->(b)
+
+create (rs)-[:AVO_DE]->(r)
+create (rs)-[:AVO_DE]->(a)
+create (rs)-[:AVO_DE]->(s)
+create (rs)-[:AVO_DE]->(b)
+
+create (r)-[:IRMAO_IRMA_DE]->(b)
+create (r)-[:IRMAO_IRMA_DE]->(a)
+create (r)-[:IRMAO_IRMA_DE]->(s)
+
+create (a)-[:IRMAO_IRMA_DE]->(b)
+create (a)-[:IRMAO_IRMA_DE]->(r)
+create (a)-[:IRMAO_IRMA_DE]->(s)
+
+create (s)-[:IRMAO_IRMA_DE]->(b)
+create (s)-[:IRMAO_IRMA_DE]->(a)
+create (s)-[:IRMAO_IRMA_DE]->(r)
+
+create (b)-[:IRMAO_IRMA_DE]->(r)
+create (b)-[:IRMAO_IRMA_DE]->(a)
+create (b)-[:IRMAO_IRMA_DE]->(s)
+
+match(j:Pessoa{nome: "Jon Snow"}), (l:Pessoa{nome: "Lyanna Stark"}), (a:Pessoa{nome: "Aerys Targaryen"}),
+(d:Pessoa{nome: "Daenerys Targaryen"})
+create (l)-[:PAI_MAE_DE{legitimo:false}]->(j)
+create (a)-[:AVO_DE]->(j)
+create (d)-[:ALIADO_DE]->(j)
+create (j)-[:ALIADO_DE]->(d)
