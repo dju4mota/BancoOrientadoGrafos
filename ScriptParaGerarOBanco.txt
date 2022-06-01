@@ -26,10 +26,10 @@ create (lyanna_stark:Guerreira:Pessoa{nome: "Lyanna Stark", ano_nascimento: 266,
 // definindo relacionamentos 
 
 
-PAI_MAE_DE  - legitimo: true/false
-IRMAO_IRMA_DE 
-AVO_DE
-ALIADO_DE 
+//PAI_MAE_DE  - legitimo: true/false
+//IRMAO_IRMA_DE 
+//AVO_DE
+//ALIADO_DE 
 
 // criando os relacionamentos
 
